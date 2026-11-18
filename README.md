@@ -5,3 +5,7 @@ Hi! I'm Zaba515
 This is my first project ever!
 
 I'm learning how to code
+
+## About Me
+
+I love music and I love learning about things!
