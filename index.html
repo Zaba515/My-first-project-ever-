@@ -61,6 +61,42 @@ function checkEmail() {
   alert('Type your email on that safe site. This app did NOT save it.');
 }
 </script>
+<!-- NEW FEATURES -->
+<div style="background:white; padding:20px; border-radius:15px; margin-top:20px;">
+<h2>🔐 Password Strength Checker</h2>
+<p>Type YOUR password to test it. It never leaves your phone.</p>
+<input type="password" id="myPass" placeholder="Type your password here" style="width:100%; padding:12px; border-radius:10px; border:1px solid #ccc;">
+<button onclick="checkPass()" style="width:100%; padding:12px; background:#22c55e; color:white; border:none; border-radius:10px; margin-top:10px; font-weight:bold;">Check My Password</button>
+<p id="passResult" style="font-weight:bold; margin-top:10px;"></p>
+</div>
 
+<div style="background:white; padding:20px; border-radius:15px; margin-top:20px;">
+<h2>📱 WhatsApp Safety Check</h2>
+<p>Tick what is happening to you:</p>
+<label><input type="checkbox" class="wa"> I see a device I don't recognise</label><br>
+<label><input type="checkbox" class="wa"> Messages show as read but I didn't read them</label><br>
+<label><input type="checkbox" class="wa"> I got a WhatsApp code I didn't ask for</label><br>
+<label><input type="checkbox" class="wa"> My WhatsApp logs me out by itself</label><br>
+<button onclick="checkWA()" style="width:100%; padding:12px; background:#25D366; color:white; border:none; border-radius:10px; margin-top:10px; font-weight:bold;">Check If I'm Compromised</button>
+<p id="waResult" style="font-weight:bold; margin-top:10px;"></p>
+<a href="https://wa.me/" target="_blank" style="display:block; text-align:center; margin-top:10px;">Open WhatsApp > Linked Devices To Check Manually →</a>
+</div>
+
+<script>
+function checkPass(){
+  let p = document.getElementById('myPass').value;
+  let r = document.getElementById('passResult');
+  if(p.length < 6) { r.innerHTML = "🚨 WEAK! Hacker cracks this in seconds. Make it longer!"; r.style.color="red"; }
+  else if(p.length < 10) { r.innerHTML = "⚠️ MEDIUM. Okay but add numbers + symbols!"; r.style.color="orange"; }
+  else { r.innerHTML = "✅ STRONG! Good job, this is hard to crack!"; r.style.color="green"; }
+}
+function checkWA(){
+  let ticks = document.querySelectorAll('.wa:checked').length;
+  let r = document.getElementById('waResult');
+  if(ticks == 0) { r.innerHTML = "✅ SAFE! No signs of compromise."; r.style.color="green"; }
+  else if(ticks == 1) { r.innerHTML = "⚠️ SUSPICIOUS! Go to WhatsApp > Linked Devices and remove unknown devices NOW."; r.style.color="orange"; }
+  else { r.innerHTML = "🚨 POSSIBLY COMPROMISED! Remove all linked devices, turn on 2-Step Verification NOW!"; r.style.color="red"; }
+}
+</script>
 </body>
 </html>
