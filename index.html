@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>My OSINT Lab - Zaba515</title>
+<style>
+body { font-family: Arial; background: #111; color: white; text-align: center; padding: 20px; }
+.box { background: #222; padding: 20px; border-radius: 15px; margin: 15px 0; }
+input { padding: 10px; width: 80%; border-radius: 10px; border: none; }
+button { padding: 10px 20px; background: #00ff88; border: none; border-radius: 10px; font-weight: bold; margin-top: 10px; }
+a { color: #00ff88; }
+</style>
+</head>
+<body>
+
+<h1>🕵️ My OSINT Lab</h1>
+<p>Built by Zaba515 - For checking MY OWN digital footprint only</p>
+
+<div class="box">
+<h2>1. Check My Username</h2>
+<p>Type your public username. This does NOT save it.</p>
+<input id="username" placeholder="e.g. Zaba515">
+<br>
+<button onclick="checkUser()">Check Username</button>
+<p id="userResult"></p>
+</div>
+
+<div class="box">
+<h2>2. Check My Email For Leaks</h2>
+<p>We will NOT save your email. This just opens the safe checker.</p>
+<input id="email" placeholder="Type your email here">
+<br>
+<button onclick="checkEmail()">Check Email</button>
+<p>Your email is never stored in this app.</p>
+</div>
+
+<div class="box">
+<h2>3. What If Someone Has My IP?</h2>
+<p><b>Don't panic.</b> IP alone = just an address.</p>
+<p>✅ Fix: Restart router for 10 mins = new IP</p>
+<p>✅ Fix: Turn OFF Port Forwarding in router</p>
+<p>✅ Fix: Update router + use strong WiFi password</p>
+<p>✅ Fix: Use VPN on public WiFi</p>
+</div>
+
+<p>Made for learning cybersecurity - Ethically 💚</p>
+
+<script>
+function checkUser() {
+  let u = document.getElementById('username').value;
+  if(!u){ alert('Type a username first'); return; }
+  document.getElementById('userResult').innerHTML = 
+  'Search for <b>' + u + '</b> on:<br>' +
+  '<a href="https://github.com/' + u + '" target="_blank">GitHub</a> | ' +
+  '<a href="https://instagram.com/' + u + '" target="_blank">Instagram</a> | ' +
+  '<a href="https://x.com/' + u + '" target="_blank">X / Twitter</a>';
+}
+function checkEmail() {
+  let e = document.getElementById('email').value;
+  if(!e){ alert('Type an email first'); return; }
+  window.open('https://haveibeenpwned.com/', '_blank');
+  alert('Type your email on that safe site. This app did NOT save it.');
+}
+</script>
+
+</body>
+</html>
