@@ -98,5 +98,39 @@ function checkWA(){
   else { r.innerHTML = "🚨 POSSIBLY COMPROMISED! Remove all linked devices, turn on 2-Step Verification NOW!"; r.style.color="red"; }
 }
 </script>
+  <div class="box">
+<h2>4. 🎣 Phishing Link Checker</h2>
+<p>Paste a suspicious link. Don't click it - check it here first!</p>
+<input id="linkInput" placeholder="Paste link here e.g. faceb00k-login.com">
+<br>
+<button onclick="checkPhish()">Check Link</button>
+<p id="phishResult"></p>
+</div>
+
+<script>
+function checkPhish() {
+  let link = document.getElementById('linkInput').value.toLowerCase();
+  let result = document.getElementById('phishResult');
+  if(!link){ alert('Paste a link first'); return; }
+
+  let score = 0;
+  let reasons = [];
+
+  if(link.startsWith('http://')) { score += 2; reasons.push('❌ Uses http (not secure https)'); }
+  if(link.includes('login') || link.includes('verify') || link.includes('free') || link.includes('urgent')) { score += 2; reasons.push('❌ Uses urgent words like login / verify / free'); }
+  if(link.includes('faceb00k') || link.includes('0') || link.includes('rn')) { score += 2; reasons.push('❌ Looks like letter trick (0 instead of o)'); }
+  if((link.match(/-/g) || []).length >= 3) { score += 1; reasons.push('❌ Too many dashes - often fake'); }
+  if(link.length > 60) { score += 1; reasons.push('❌ Very long link - hiding real site'); }
+  if(link.includes('.tk') || link.includes('.ml') || link.includes('.ga')) { score += 2; reasons.push('❌ Uses free suspicious domain'); }
+
+  if(score >= 4) {
+    result.innerHTML = '<b style="color:red">🚨 DANGER! DO NOT CLICK! This looks like PHISHING!</b><br>' + reasons.join('<br>');
+  } else if(score >= 2) {
+    result.innerHTML = '<b style="color:orange">⚠️ SUSPICIOUS! Be careful, check twice.</b><br>' + reasons.join('<br>');
+  } else {
+    result.innerHTML = '<b style="color:#00ff88">✅ Looks OK, but still be careful!</b><br>No obvious phishing signs found.';
+  }
+}
+</script>
 </body>
 </html>
